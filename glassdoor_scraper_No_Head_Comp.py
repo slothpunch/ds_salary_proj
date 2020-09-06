@@ -25,7 +25,6 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
     driver.set_window_size(1120, 1000)
 
     url = "https://www.glassdoor.com.au/Job/jobs.htm?sc.generalKeyword=" + keyword + "&sc.locationSeoString=chicago&locId=1128808&locT=C&countryRedirect=true"
-    #url = 'https://www.glassdoor.com/Job/jobs.htm?sc.keyword="' + keyword + '"&locT=C&locId=1147401&locKeyword=San%20Francisco,%20CA&jobType=all&fromAge=-1&minSalary=0&includeNoSalaryJobs=true&radius=100&cityId=-1&minRating=0.0&industryId=-1&sgocId=-1&seniorityType=all&companyId=-1&employerSizes=0&applicationType=0&remoteWorkType=0'
     driver.get(url)
     jobs = []
 
@@ -44,7 +43,6 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
         time.sleep(.1)
 
         try:
-#            driver.find_element_by_class_name("ModalStyle__xBtn___29PT9").click()  #clicking to the X.
             driver.find_element_by_css_selector('[alt="Close"]').click() #clicking to the X.
         except NoSuchElementException:
             pass
@@ -58,7 +56,6 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             if len(jobs) >= num_jobs:
                 break
 
-#            job_button.click()  #You might  --> chromedriver interuptable error
             driver.execute_script("arguments[0].click();", job_button)
             time.sleep(1)
             collected_successfully = False
@@ -98,15 +95,6 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
             try:
                 driver.find_element_by_xpath('.//div[@class="tab" and @data-tab-type="overview"]').click()
 
-#                try:
-                    #<div class="infoEntity">
-                    #    <label>Headquarters</label>
-                    #    <span class="value">San Francisco, CA</span>
-                    #</div>
-#                    headquarters = driver.find_element_by_xpath('.//div[@class="infoEntity"]//label[text()="Headquarters"]//following-sibling::*').text
-#                except NoSuchElementException:
-#                    headquarters = -1
-
                 try:
                     size = driver.find_element_by_xpath('.//div[@class="infoEntity"]//label[text()="Size"]//following-sibling::*').text
                 except NoSuchElementException:
@@ -137,31 +125,22 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
                 except NoSuchElementException:
                     revenue = -1
 
-#                try:
-#                    competitors = driver.find_element_by_xpath('.//div[@class="infoEntity"]//label[text()="Competitors"]//following-sibling::*').text
-#                except NoSuchElementException:
-#                    competitors = -1
-
             except NoSuchElementException:  #Rarely, some job postings do not have the "Company" tab.
-#                headquarters = -1
                 size = -1
                 founded = -1
                 type_of_ownership = -1
                 industry = -1
                 sector = -1
                 revenue = -1
-#                competitors = -1
 
                 
             if verbose:
-#                print("Headquarters: {}".format(headquarters))
                 print("Size: {}".format(size))
                 print("Founded: {}".format(founded))
                 print("Type of Ownership: {}".format(type_of_ownership))
                 print("Industry: {}".format(industry))
                 print("Sector: {}".format(sector))
                 print("Revenue: {}".format(revenue))
-#                print("Competitors: {}".format(competitors))
                 print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
             jobs.append({"Job Title" : job_title,
@@ -170,14 +149,12 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
                     "Rating" : rating,
                     "Company Name" : company_name,
                     "Location" : location,
-#                    "Headquarters" : headquarters,
                     "Size" : size,
                     "Founded" : founded,
                     "Type of ownership" : type_of_ownership,
                     "Industry" : industry,
                     "Sector" : sector,
                     "Revenue" : revenue})
-#                    "Competitors" : competitors})
                     #add job to jobs
 
         #Clicking on the "next page" button

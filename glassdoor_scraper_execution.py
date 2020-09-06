@@ -10,6 +10,6 @@ import pandas as pd
 
 path = "D:/Kaggle/0. Data_Science_Salaries/ds_salary_proj/chromedriver"
 
-df = gs.get_jobs("data scientist", 15, False, path, 15)
+df = gs.get_jobs("data scientist", 500, False, path, 15)
 
-#df.to_csv('glassdoor_jobs.csv', inex=False)
+df.to_csv('glassdoor_jobs.csv', index=False)
