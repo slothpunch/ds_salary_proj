@@ -2,7 +2,8 @@
 """
 Spyder Editor
 
-This is a temporary script file.
+author: arapfaik
+url: https://github.com/arapfaik/scraping-glassdoor-selenium
 """
 
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
