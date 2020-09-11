@@ -25,7 +25,9 @@ def get_jobs(keyword, num_jobs, verbose, path, slp_time):
     driver = webdriver.Chrome(executable_path=path, options=options)
     driver.set_window_size(1120, 1000)
 
-    url = "https://www.glassdoor.com.au/Job/jobs.htm?sc.generalKeyword=" + keyword + "&sc.locationSeoString=chicago&locId=1128808&locT=C&countryRedirect=true"
+#    url = "https://www.glassdoor.com.au/Job/jobs.htm?sc.generalKeyword=" + keyword + "&sc.locationSeoString=chicago&locId=1128808&locT=C&countryRedirect=true"
+#   url = "https://www.glassdoor.com.au/Job/jobs.htm?sc.generalKeyword=%22data+scientist%22&sc.locationSeoString=us&locId=1&locT=N"    
+    url = "https://www.glassdoor.com.au/Job/jobs.htm?sc.generalKeyword="+keyword+"&sc.locationSeoString=us&locId=1&locT=N"
     driver.get(url)
     jobs = []
 
